@@ -26,26 +26,38 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 class App extends Component {
+  state = {
+    customStyles: {
+      opacity: 0,
+    },
+  };
+
+  componentDidMount() {
+    setInterval(() => {
+      this.setState({
+        customStyles: {
+          opacity: 1,
+        },
+      });
+    }, 1000);
+  }
+
   myFunction() {}
 
   render() {
     const imageInfo = {
       uri:
-        'https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/270px-Manchester_United_FC_crest.svg.png',
+        'https://img2.pngdownload.id/20180815/wk/kisspng-manchester-united-f-c-premier-league-logo-footbal-5b74d4dbeeb681.9226406815343833239778.jpg',
     };
     return (
       <>
         <View style={styles.body}>
           <View style={styles.sectionContainer}>
-            <Text style={styles.sectionTitle}>Hello World</Text>
+            <Text style={[styles.sectionTitle, this.state.customStyles]}>
+              Hello World
+            </Text>
           </View>
-          <Image
-            style={styles.image}
-            source={{
-              uri:
-                'https://img2.pngdownload.id/20180815/wk/kisspng-manchester-united-f-c-premier-league-logo-footbal-5b74d4dbeeb681.9226406815343833239778.jpg',
-            }}
-          />
+          <Image style={styles.image} source={imageInfo} />
         </View>
       </>
     );
