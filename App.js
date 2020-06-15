@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
+/* eslint-disable prettier/prettier */
+
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TextInput} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Button} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
@@ -15,24 +17,18 @@ x.func();
 func2();
 
 class App extends Component {
-  state = {
-    username: '',
-    password: '',
-  };
   constructor() {
     super();
+    this.buttonPressed = this.buttonPressed.bind(this);
+    this.password = React.createRef();
+  }
+  state = {
+    username: null,
+    password: null,
   }
 
-  handleUsernameChange(newText) {
-    this.setState({
-      value: newText,
-    });
-  }
-
-  handlePasswordChange(newText) {
-    this.setState({
-      value: newText,
-    });
+  buttonPressed() {
+    console.log('hasil', this.state.password);
   }
 
   render() {
@@ -40,10 +36,15 @@ class App extends Component {
       <>
         <View style={styles.body}>
           <Text>Username</Text>
-          <TextInput onChangeText={this.handleUsernameChange.bind(this)} />
+          <TextInput
+            defaultValue={this.state.username}
+            onChangeText={text => this.setState({username: text})} />
           <Text>Password</Text>
-          <TextInput onChangeText={this.handlePasswordChange.bind(this)} />
-          <Text>You are writing {this.state.value}</Text>
+          <TextInput
+            defaultValue={this.state.password}
+            onChangeText={text=>this.setState({password: text})}/>
+          <Button title={'Hello'} onPress={this.buttonPressed} />
+          <Text>You are writing {this.state.username}</Text>
         </View>
       </>
     );
